@@ -1,0 +1,30 @@
+
+    [
+      {
+        "id": "Name",
+        "label": "What is your name?",
+        "value": "",
+        "type": "input",
+        "required": "true",
+        "validators": {
+          "required": true,
+          "minLength": 10
+        }
+      },
+      {
+        "id": "Gender",
+        "label": "What is your gender?",
+        "value": "Male,Female",
+        "type": "radio",
+        "required": "true"
+      },
+      {
+        "id": "Hobbies",
+        "label": "Select all your hobbies",
+        "value": "false",
+        "type": "checkbox",
+        "options": "Music,Movies,Sports",
+        "required": "true",
+        "validators": {}
+      }
+    ]
