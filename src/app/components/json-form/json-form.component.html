@@ -1,0 +1,97 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<section class="card m-3">
+    <!-- <div class="col-md-6">{{ttttt.value | json}}</div> -->
+    <h1 class="card-header">Registration Form</h1>
+    <div class="card-body">
+        <form id="form" [formGroup]="ttttt">
+            <div class="form-row">
+                <div class="col-md-12" *ngFor="let control of dynamicFormArray">
+                    <div [ngSwitch]="control.type">
+                        <div *ngSwitchCase="'input'">
+                            <div class="form-group col-5">
+                                <label style="font-style: italic;"><b>{{control.label}}</b></label>
+                            </div>
+                            <div class="form-group col-5">
+                                <input type="text" class="form-control" [formControlName]="control.id" ng-required="true" allow-pattern="[a-z]">
+                            </div>
+                        </div>
+                        <div *ngSwitchCase="'radio'">
+                            <div class="form-group col-4">
+                                <label style="font-style: italic;"><b>{{control.label}}</b></label>
+                            </div>
+                            <div class="form-group col-4">
+                                <label class="radio" *ngFor="let val of control.value.split(',')" >
+                                    <input type="radio" name={{control.id}} value={{val}} [formControlName]="control.id">
+                                    {{val}}
+                                </label>
+                            </div>
+                        </div>
+                        <div *ngSwitchCase="'checkbox'">
+                            <div class="form-group col-5">
+                                <label style="font-style: italic;"><b>{{control.label}}</b></label>
+                            </div>
+                            <div class="form-group col-5">
+                                <label class="checkbox" *ngFor="let val of control.options.split(',')" >
+                                    <p><input type="checkbox" name={{control.id}} value={{val}} [formControlName]="control.id"
+                                        (change)="onCheckChange($event)">
+                                    {{val}}</p>
+                                </label>
+                            </div>
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-5">
+                <button class="btn btn-primary mr-1" color="primary" style="float: left;" [disabled]="ttttt.invalid" (click)="Submit()">Submit</button>
+            </div>
+        </form>
+
+        
+    </div>
+    
+</section>
+
+<section class="example-container mat-elevation-z8" tabindex="0">
+    <mat-card>
+  
+  
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  
+        <ng-container matColumnDef="Name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Gender">
+          <th mat-header-cell *matHeaderCellDef> Gender </th>
+          <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Hobbies">
+            <th mat-header-cell *matHeaderCellDef> Hobbies </th>
+            <td mat-cell *matCellDef="let element"> {{element.hobbies}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button color="warn" (click)="DeleteClient(element.id)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card>
+</section>
+
+
+  
